@@ -54,11 +54,6 @@ a deeper section of this one.
   job (data shapes), all at once.
 
 ## Sources
-
-Verified independently (web search, not this conversation's own documents) —
-each one names an existing, real practice this template borrows from, never
-taken on faith:
-
 - Components are drawn as a diagram, not described in prose, the same way
   the [C4 model](https://c4model.com) (Simon Brown) treats Component as its
   own level, distinct from Code — section 2 of `feature-level.md` is named
