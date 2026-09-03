@@ -26,10 +26,14 @@ Mechanism · Sanctioned Communication Channels (no silent third one) · State
 Management & Routing · Global Invariants (identity, persistence, security) ·
 Mechanical Controls · QA Isolation Rule.
 
-**Feature (7 sections):** Scope & Boundaries · Component System Context
-(C4 L3) · Interface & Data Contracts (C4 L4) · Dynamic Behavior · Error &
-Reason Code Mapping · Mechanical Controls & NFRs (feature-specific only) ·
-QA Isolation Rules (restated for this feature's own tests).
+**Feature (4 sections):** Scope & Boundaries · Component System Context
+(C4 L3) · Dynamic Behavior · QA Isolation Rules (restated for this feature's
+own tests).
+
+Capped at C4 Level 3 on purpose. Data contracts, endpoints, DTOs and error
+codes (C4 Level 4) belong to this feature's own **API contracts +
+DataModels** document instead — a different topic in the same pipeline, not
+a deeper section of this one.
 
 ## Why this format
 
@@ -38,16 +42,16 @@ QA Isolation Rules (restated for this feature's own tests).
   invents architecture to fill the gaps.
 - **Diagrams over prose at component level.** "Module A talks to B" leaves
   the path, data shape and direction to invent; a C4 diagram doesn't.
-- **Contracts before code.** Every field traces to a requirement, or is
-  flagged as not one — so nothing invented during derivation looks sourced.
 - **Explicit state machines.** Prose hides forgotten states and simultaneous
   transitions; a diagram forces full enumeration.
-- **Deterministic error mapping.** Otherwise exception handling is left to
-  whoever implements it, inconsistently across features.
-- **NFRs need a metric and a target.** "Should be fast" isn't verifiable —
-  a CI gate needs a number to check against.
 - **QA isolation as a rule, not a reminder.** Whoever is graded shouldn't be
   able to alter the grading.
+- **Capped at C4 Level 3.** Data contracts, error codes and DTOs are a
+  different kind of thing than a component diagram — mixing them in is how
+  a "system context" document quietly grows into doing Requirements' job
+  (non-functional requirements), the Grill Phase's job (parking an open
+  question here instead of raising it), and the API contracts document's
+  job (data shapes), all at once.
 
 ## Sources
 
@@ -56,9 +60,9 @@ each one names an existing, real practice this template borrows from, never
 taken on faith:
 
 - Components are drawn as a diagram, not described in prose, the same way
-  the [C4 model](https://c4model.com) (Simon Brown) separates a Component
-  level from a Code level — sections 2 and 3 of `feature-level.md` are
-  named directly after C4 Levels 3 and 4.
+  the [C4 model](https://c4model.com) (Simon Brown) treats Component as its
+  own level, distinct from Code — section 2 of `feature-level.md` is named
+  directly after C4 Level 3, and stops there on purpose.
 - `project-level.md` works as one persistent document every feature defers
   to and never contradicts, the same role [GitHub Spec Kit](https://github.com/github/spec-kit)
   gives its `constitution.md`: every other phase there (spec, plan, tasks)
@@ -76,21 +80,12 @@ taken on faith:
   what's included, as suggested by Martin Fowler's
   ["Bounded Context"](https://martinfowler.com/bliki/BoundedContext.html) —
   a boundary is only useful once it also says what's on the other side of it.
-- NFRs need a metric and a target rather than a description, following Tom
-  Gilb's Planguage, where every quality attribute carries a
-  [Scale, a Meter and a Target](https://www.methodsandtools.com/archive/archive.php?id=91).
 - Dynamic behavior is modeled as an explicit state machine, the same
   notation David Harel introduced as
   [statecharts](https://en.wikipedia.org/wiki/Harel_statechart) in 1987 —
   the direct ancestor of the Mermaid `stateDiagram-v2` used in the examples
   here.
-- EARS (Alistair Mavin, Rolls-Royce; [official guide](https://alistairmavin.com/ears/))
-  is a real, widely adopted way to write unambiguous requirements, but it
-  hasn't been worked into either file yet — the natural next step if
-  "Error & Reason Code Mapping" or "Data Contracts" need to become
-  mechanically checkable.
 
 What isn't here: project identity, folder pattern, composition mechanism,
-global invariants, and the shape of "Error & Reason Code Mapping" follow no
-external source found and verified — general practice, stated as such
-rather than attributed on a guess.
+and global invariants follow no external source found and verified —
+general practice, stated as such rather than attributed on a guess.
