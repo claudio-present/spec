@@ -7,6 +7,10 @@
   project-level.md instead — never re-explain a mechanism it already states,
   only use it.
 
+  Scope is capped at C4 Level 3 (components) — data contracts, endpoints and
+  DTOs (C4 Level 4) live in this feature's own API contracts + DataModels
+  document, never here.
+
   Write "N/A — <why>" rather than deleting a section that doesn't apply.
 -->
 
@@ -46,30 +50,7 @@ C4Component
 **Read of this diagram:** <which dependencies are sanctioned per
 `project-level.md` §4, and which are new couplings this feature must justify>
 
-## 3. Interface & Data Contracts (C4 Level 4)
-
-<!-- Adapt the shape to how boundaries actually work here — endpoints for an
-     HTTP API, a service-interface table for an in-process module. -->
-
-### <API interface contracts | Public service contract>
-
-| <Endpoint / Member> | <Method / Signature> | Notes |
-|---|---|---|
-| `<name>` | `<verb + path>` or `<return type>` | <notes> |
-
-### <Client-side DTOs | Data contracts>
-
-**`<TypeName>`**
-
-| Field | Type | Origin requirement |
-|---|---|---|
-| `<field>` | `<type>` | `<US-ID or "derived, not stated">` |
-
-### Open items carried from real material
-
-<any ambiguity the source stories leave open — name it, don't silently resolve it>
-
-## 4. Dynamic Behavior
+## 3. Dynamic Behavior
 
 <!-- One state machine per distinct lifecycle; built on top of the
      state-management approach project-level.md §5 fixes, never a different one. -->
@@ -83,22 +64,7 @@ stateDiagram-v2
 
 <add a sequence diagram instead/alongside wherever a flow reads better than states>
 
-## 5. Error & Reason Code Mapping
-
-| Condition | Code / Behavior | Requirement-traceable? |
-|---|---|---|
-| `<condition>` | `<ERR_CODE>` → `<mandatory behavior>` | `<Yes — US-ID | No — derived>` |
-
-## 6. Mechanical Controls & Non-Functional Requirements (NFRs)
-
-<!-- Every NFR needs a metric and a target. Only what's specific to this
-     feature — project-level.md §7's global controls apply automatically. -->
-
-| Category | Metric | Target | Source |
-|---|---|---|---|
-| `<performance \| complexity \| security \| …>` | `<what is measured>` | `<concrete bound>` | `<US-ID \| HD-ID \| project-level.md>` |
-
-## 7. QA Isolation Rules
+## 4. QA Isolation Rules
 
 <which tests exist for this feature, where they live, and what access an
 implementing agent has to them and to their expected/golden output>
