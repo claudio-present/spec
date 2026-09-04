@@ -10,5 +10,7 @@ Living registry of gaps found while reviewing requirements. Only `Open` and `Ans
 
 **Question:** ...
 
+**Notes:** (optional — investigation so far, while still Open: research done, people consulted, options explored. Not a substitute for an answer.)
+
 **Resolved by:** HD-<ID> (see requirements/requirements.md)
 -->

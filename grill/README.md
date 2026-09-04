@@ -43,6 +43,8 @@ When a gap is found in a requirement (e.g. *"what happens if the network drops m
 
 **Every gap always gets asked to a human — no exceptions.** `Category` only decides whether the pipeline *waits* for the answer; it never authorizes the AI to resolve the doubt itself or skip the question. Whatever the doubt, `Blocking` or `Non-blocking`, it goes through step 2 and reaches `Answered`; there is no path from `Open` straight to `Closed`, and no path that bypasses a human decision-maker.
 
+`Blocking` is the default. Not knowing the answer yet is not a reason to downgrade to `Non-blocking` — that would let code get generated on top of an unresolved gap, exactly the guess-driven development this phase exists to prevent. Use the optional **Notes** field in the OQ entry to track investigation in progress (research, options explored, people consulted) without touching `Category` or `State`.
+
 There is no separate pipeline-state file (no `STATE.md`). The gate is a rule derived directly from this registry: **a `REQ`/`NFR` is gapped if it has an `Open` OQ with `Category: Blocking` applied to it.** Nothing to keep in sync — the registry is the single source of truth.
 
 ### 2. HD (Human Decision) — resolution
