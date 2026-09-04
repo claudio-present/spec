@@ -69,16 +69,6 @@ To build a synchronous, computable spec, four independent and modular categories
 
 ---
 
-
 ## From Pillar to `sources.md`
 
 Every input actually consumed — regardless of which pillar it comes from — gets one entry in `sources.md`: what it is, where it came from, which requirement it feeds, and why it was consumed (or, for a related input that was deliberately left out, why not). See [`sources.md`](./sources.md) for the entry format.
-
----
-
-## Open design questions
-
-- Whether `sources.md` should eventually be replaced by a machine-generated lock file (hash-based, auto-detecting changed/new/removed inputs) instead of a hand-maintained registry — [`OQ-001`](../grill/open-questions.md).
-- Whether MoSCoW belongs at this input-triage stage, tagging a raw user story before decomposition, even though it was dropped from `requirements/` itself — [`OQ-002`](../grill/open-questions.md).
-
-Neither is decided here — see the linked entries in `grill/open-questions.md`.
