@@ -16,7 +16,7 @@ grill/
 ```
 
 - **`open-questions.md`** holds only what's still active. It's meant to stay small — an agent scanning it should immediately see what's blocking what.
-- **`traceability.md`** is where a question's full history goes once it's Closed: context, alternatives considered, the final decision. Kept apart from the active file to protect the generation agent's context window from **context rot** (the decline in response quality as the context window fills up).
+- **`traceability.md`** is where everything about a question goes once it's Closed — not just the decision: context, meeting notes, rejected alternatives and why, research gathered along the way. Kept apart from the active file to protect the generation agent's context window from **context rot** (the decline in response quality as the context window fills up).
 
 > Source: [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core)
 
@@ -55,7 +55,7 @@ A decision-maker (PO, architect, stakeholder) answers the question. The decision
 
 ### 3. Traceability — archive
 
-Once the decision is fully documented, the OQ is marked `Closed`: its full record (context, alternatives, the decision) moves permanently into `traceability.md`, and the entry is removed from `open-questions.md`. What remains is a clean, bidirectional trail: `AC` in the requirement file → `HD-<ID>` in `requirements.md` → full discussion in `traceability.md`.
+Once the decision is fully documented, the OQ is marked `Closed`: everything about it — context, meeting notes, rejected alternatives, research, the decision — moves permanently into `traceability.md`, and the entry is removed from `open-questions.md`. What remains is a clean, bidirectional trail: `AC` in the requirement file → `HD-<ID>` in `requirements.md` → full log in `traceability.md`.
 
 ---
 
