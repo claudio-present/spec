@@ -41,11 +41,17 @@ To build a synchronous, computable spec, four independent and modular categories
 
 **Governance rule:** user stories act as **immutable ancestors**. If the underlying business rules change later, the original story is never edited directly in the active file — instead, an *ancestral override* (a new story that inherits from and supersedes the previous one) is created, with full history kept in Git for continuous audit.
 
+**Physical archiving:** once a story's override chain is settled, the superseded versions are moved into a dedicated archive folder rather than left cluttering the active input set — the same low-noise cleanup OpenSpec performs when a change proposal is closed.
+
+> Source: [OpenSpec](https://github.com/Fission-AI/OpenSpec)
+
 ### Pillar B: MCPs & Context Gateways (the technical input)
 
 **What it is:** controlled access to database schemas, existing API contracts, legacy code, or external technical documentation.
 
-**Integration via MCP:** to avoid clogging the AI's context window (which severely degrades logical generation), extensive manuals are not injected wholesale. The engine uses MCP connectors to expose on-demand query APIs — the specification agent consults the relevant documentation only at the exact moment it needs it to structure the conditional rule that depends on it.
+**Integration via MCP:** piling instructions and context into a single session degrades a model's reasoning and its ability to follow rules — the "curse of instructions." To avoid that, extensive manuals are not injected wholesale. The engine uses MCP connectors to expose on-demand query APIs — the specification agent consults the relevant documentation only at the exact moment it needs it to structure the conditional rule that depends on it, the same on-demand activation AWS Kiro's "Powers" use for domain-specific connectors (e.g. a payments API, a database schema) — loaded only when the domain is invoked, unloaded right after.
+
+> Source: [Addy Osmani — "How to write a good spec for AI agents"](https://addyo.substack.com/p/how-to-write-a-good-spec-for-ai-agents)
 
 ### Pillar C: Cross-Spec Relations
 
@@ -53,11 +59,27 @@ To build a synchronous, computable spec, four independent and modular categories
 
 **Structural rule:** every input explicitly declares which capabilities ([`requirements/functional/<feature>.md`](../requirements/functional/)) or platform constraints ([`requirements/non-functional/<attribute>.md`](../requirements/non-functional/)) it connects to, guaranteeing strict consistency of types, events, and data flows without duplicating text.
 
+**Spec vs. steering:** an input either describes one task-scoped piece of behavior (a `functional/`/`non-functional/` requirement — a "Spec") or a project-wide rule that every feature must defer to and never contradict (a "Steering file" — in this repo, [`system-context/project-level.md`](../system-context/project-level.md)). An input that reads the same for every feature belongs to the latter; conflating the two is how a requirement quietly re-litigates a rule that was already settled at the project level.
+
 ### Pillar D: Human Decision Ledger (`HD-<ID>`)
 
 **What it is:** the set of immutable architecture and product decisions already closed by the human team, after passing through the [Grill phase](../grill/README.md).
 
-**Validation rule:** if a new business input directly conflicts with a decision already recorded in the ledger ([`HD-<ID>` in `requirements/requirements.md`](../requirements/requirements.md)), that's a synchronous-integrity error — it forces the team to re-open the conflict, not silently override the recorded decision. Re-opening it means raising a new `OQ-<ID>` in [`grill/open-questions.md`](../grill/open-questions.md), never editing the closed `HD-<ID>` or its archived record in [`grill/traceability.md`](../grill/traceability.md) directly.
+**Validation rule:** if a new business input directly conflicts with a decision already recorded in the ledger ([`HD-<ID>` in `requirements/requirements.md`](../requirements/requirements.md)) or with a project-wide invariant in [`system-context/project-level.md`](../system-context/project-level.md#6-global-invariants), that's a synchronous-integrity error — it forces the team to re-open the conflict, not silently override what's already recorded. Re-opening it means raising a new `OQ-<ID>` in [`grill/open-questions.md`](../grill/open-questions.md), never editing the closed `HD-<ID>`, its archived record in [`grill/traceability.md`](../grill/traceability.md), or a project-level invariant directly.
+
+---
+
+## Decomposing a Story: 5 Behavioral Parts
+
+A user story (Pillar A) is an input, but it can't be turned directly into an EARS-worded requirement — it's still too abstract. Before it reaches `requirements/`, it gets decomposed into 5 elementary parts:
+
+1. **Trigger / Actor** — the user or system event that starts the behavior (e.g. *"when the user taps Confirm"*).
+2. **Inputs & Validations** — the data involved and the entry-barrier rules on it (e.g. *"the album title must be a non-empty string up to 50 characters"*).
+3. **Processing Logic** — the state transitions, calculations, or data transformations applied.
+4. **Outputs & States** — the observable result or persistent change produced (e.g. *"the album is persisted with status `DRAFT`"*).
+5. **Error Paths** — every predictable failure (hardware, network, business logic) and how it's handled.
+
+A decomposition only counts as done once each part maps a specific input to an observable output — that mapping is what turns into the EARS trigger/response pair and the Acceptance Criteria in `requirements/`.
 
 ---
 
@@ -67,6 +89,9 @@ Every input actually consumed — regardless of which pillar it comes from — g
 
 ---
 
-## Open design question
+## Open design questions
 
-Whether `sources.md` should eventually be replaced by a machine-generated lock file (hash-based, auto-detecting changed/new/removed inputs) instead of a hand-maintained registry is tracked as [`OQ-001`](../grill/open-questions.md) — not decided here.
+- Whether `sources.md` should eventually be replaced by a machine-generated lock file (hash-based, auto-detecting changed/new/removed inputs) instead of a hand-maintained registry — [`OQ-001`](../grill/open-questions.md).
+- Whether MoSCoW belongs at this input-triage stage, tagging a raw user story before decomposition, even though it was dropped from `requirements/` itself — [`OQ-002`](../grill/open-questions.md).
+
+Neither is decided here — see the linked entries in `grill/open-questions.md`.
