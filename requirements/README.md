@@ -104,7 +104,7 @@ Open Questions and Acceptance Criteria are two ends of the same movement: an inc
 
 ### Open Questions
 
-**What it is:** a question about a requirement that hasn't been decided yet — handled in a transient, blocking way (identical to `/speckit.clarify`). Its presence signals the requirement is "gapped" (incomplete).
+**What it is:** a question about a requirement that hasn't been decided yet, tracked as an `OQ-<ID>` with a `State` (`Open`/`Answered`/`Closed`) and a `Category` (`Blocking`/`Non-blocking`) in `grill/open-questions.md` — see [`grill/README.md`](../grill/README.md) for the full lifecycle. A `Blocking` OQ still in `Open` state signals the requirement is "gapped" (incomplete).
 
 > Source: [github/spec-kit](https://github.com/github/spec-kit)
 
@@ -114,7 +114,7 @@ Open Questions and Acceptance Criteria are two ends of the same movement: an inc
 
 > Source: [Business Requirement to Functional Spec — Analyst Engineering](https://www.analystengineering.com/articles/business-requirement-to-functional-spec)
 
-The question itself, and the detailed record of logical discussions and product meeting notes behind its answer, belong to a separate discovery/clarification phase — not to `requirements/`. That phase's structure is not yet defined; it's currently recorded in the standalone `traceability.md` file, kept apart to protect the generation agent's active context from context rot. Every `HD-<ID>` in `requirements.md` is the output of that phase, and should reference where it came from.
+The question itself, and the detailed record of logical discussions and product meeting notes behind its answer, belong to the Grill phase — not to `requirements/`. It's tracked in `grill/open-questions.md` while active, and archived to `grill/traceability.md` once the OQ is `Closed`, kept apart to protect the generation agent's active context from context rot. Every `HD-<ID>` in `requirements.md` is the output of that phase, and its **Source** field points back to the originating `OQ-<ID>`.
 
 > Source: [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core)
 
@@ -138,7 +138,6 @@ This section explains *how* the `requirements/` folder is organized and *why*. T
 requirements/
 ├── README.md                    # this file: writing rules + folder structure
 ├── requirements.md              # product index + Human Decisions
-├── traceability.md              # decision history/reasoning
 ├── functional/
 │   ├── _TEMPLATE.md             # template for a new capability/feature
 │   └── <feature>.md             # one file per capability (REQ-*)
@@ -146,6 +145,8 @@ requirements/
     ├── _TEMPLATE.md             # template for a new quality attribute
     └── <attribute>.md           # one file per attribute (NFR-*), e.g. performance.md, security.md
 ```
+
+`traceability.md` no longer lives here — it moved to [`grill/traceability.md`](../grill/traceability.md), alongside `grill/open-questions.md`. See [`grill/README.md`](../grill/README.md) for that phase's own structure.
 
 ## Role of each file
 
@@ -155,11 +156,8 @@ requirements/
 | `requirements.md` | Index (links to `functional/`/`non-functional/`) and `Human Decisions` (the "why" behind each decision already made) | Requirements, Acceptance Criteria |
 | `functional/<feature>.md` | `REQ-<ID>` (behavior, in EARS) + its Acceptance Criteria | Discussion/reasoning behind the decision |
 | `non-functional/<attribute>.md` | `NFR-<ID>` (constraint/quality, in EARS) + its Acceptance Criteria | Discussion/reasoning behind the decision |
-| `traceability.md` | Detailed reasoning, meeting notes, arguments behind each decision | Requirements, Acceptance Criteria |
 
 The rule guiding this separation: **the requirement and its Acceptance Criteria always live together, in the same file** (`functional/`/`non-functional/`) — never in a separate artifact. Everything else (index, decisions, discussion) is metadata around the requirement, not the requirement itself.
-
-> `traceability.md` is a placeholder for that discussion/discovery phase. Its own structure isn't defined yet and it may eventually move to a dedicated directory outside `requirements/` — but every `HD-<ID>` in `requirements.md` will keep pointing back to whatever holds that phase, wherever it lives.
 
 ## The 2 ID types
 
@@ -168,10 +166,10 @@ The rule guiding this separation: **the requirement and its Acceptance Criteria 
 | `REQ-<ID>` | `functional/<feature>.md` | A system behavior, in EARS, with its Acceptance Criteria |
 | `NFR-<ID>` | `non-functional/<attribute>.md` | A constraint/quality attribute, in EARS, with its Acceptance Criteria |
 
-There is no formal "Open Question" artifact in this structure — a gap in a `REQ`/`NFR` is resolved directly (outside the file, in conversation/discussion), and the result comes in already resolved, as described below.
+An `Open Question` is a formal, tracked artifact — but not one that lives in `requirements/`. It's an `OQ-<ID>` in `grill/open-questions.md` (see [Closing a Gap](#closing-a-gap-from-open-question-to-acceptance-criteria) above). A gap in a `REQ`/`NFR` only shows up here already resolved, as a Human Decision.
 
 ## Why this separation (instead of everything in one `requirements.md`)
 
 - **Context rot**: a single giant file with all requirements, decisions, and discussions fills up the agent's context window and degrades response quality. Splitting by feature/attribute keeps each file small and focused.
 - **Integrated Acceptance Criteria**: following Amazon Kiro / OpenSpec, the acceptance criterion always stays inside the requirement's own file — never isolated in another artifact.
-- **Human Decisions separated from discussion**: `requirements.md` keeps a readable summary of *what* was decided (useful for a product overview); `traceability.md` keeps the *how we got there* (useful for auditing, rarely needs to be read by the agent).
+- **Human Decisions separated from discussion**: `requirements.md` keeps a readable summary of *what* was decided (useful for a product overview); `grill/traceability.md` keeps the *how we got there* (useful for auditing, rarely needs to be read by the agent).

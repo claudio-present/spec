@@ -14,12 +14,12 @@ Entry point of the spec. Does not contain requirements themselves — those live
 
 ## Human Decisions
 
-Decisions made about gaps found in a requirement. What's recorded here is the decision itself (the "why"), not the acceptance criterion — that's integrated directly into the `REQ-<ID>`/`NFR-<ID>` it belongs to, in `functional/`/`non-functional/`, so as not to violate the rule that Acceptance Criteria never lives in a separate artifact. Each `HD-<ID>` is the output of an external discovery/clarification phase (structure not yet defined; currently recorded in `traceability.md`) — here there's only the decision, summarized.
+Decisions made about gaps found in a requirement. What's recorded here is the decision itself (the "why"), not the acceptance criterion — that's integrated directly into the `REQ-<ID>`/`NFR-<ID>` it belongs to, in `functional/`/`non-functional/`, so as not to violate the rule that Acceptance Criteria never lives in a separate artifact. Each `HD-<ID>` is the output of the Grill phase (see `grill/`) — here there's only the decision, summarized.
 
 <!--
 ### HD-<ID> — <short title>
 **Applies to:** REQ-<ID> | NFR-<ID> | cross-cutting
-**Source:** <link to the discovery/clarification phase entry this decision came from>
+**Source:** OQ-<ID> (see grill/open-questions.md or grill/traceability.md once Closed)
 
 **Decision:** ...
 (the resulting Acceptance Criteria is already in functional/<feature>.md or non-functional/<attribute>.md, inside the REQ-<ID>/NFR-<ID> above)
