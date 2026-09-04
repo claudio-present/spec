@@ -41,7 +41,7 @@ When a gap is found in a requirement (e.g. *"what happens if the network drops m
 - **Category:** `Blocking` or `Non-blocking` — see below
 - **Applies to:** the `REQ-<ID>` / `NFR-<ID>` it affects, or `cross-cutting`
 
-`Category` only decides whether the pipeline *waits* for the answer — it never decides whether a human answer is needed. Every OQ, `Blocking` or `Non-blocking`, must eventually go through step 2 and reach `Answered`; there is no path from `Open` straight to `Closed`.
+**Every gap always gets asked to a human — no exceptions.** `Category` only decides whether the pipeline *waits* for the answer; it never authorizes the AI to resolve the doubt itself or skip the question. Whatever the doubt, `Blocking` or `Non-blocking`, it goes through step 2 and reaches `Answered`; there is no path from `Open` straight to `Closed`, and no path that bypasses a human decision-maker.
 
 There is no separate pipeline-state file (no `STATE.md`). The gate is a rule derived directly from this registry: **a `REQ`/`NFR` is gapped if it has an `Open` OQ with `Category: Blocking` applied to it.** Nothing to keep in sync — the registry is the single source of truth.
 
