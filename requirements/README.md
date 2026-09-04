@@ -131,7 +131,7 @@ Open Questions and Acceptance Criteria are two ends of the same movement: an inc
 
 > Source: [Business Requirement to Functional Spec — Analyst Engineering](https://www.analystengineering.com/articles/business-requirement-to-functional-spec)
 
-The detailed record of logical discussions and product meeting notes behind the decision is moved permanently to the standalone `traceability.md` file, protecting the generation agent's active context from context rot.
+The question itself, and the detailed record of logical discussions and product meeting notes behind its answer, belong to a separate discovery/clarification phase — not to `requirements/`. That phase's structure is not yet defined; it's currently recorded in the standalone `traceability.md` file, kept apart to protect the generation agent's active context from context rot. Every `HD-<ID>` in `requirements.md` is the output of that phase, and should reference where it came from.
 
 > Source: [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core)
 
@@ -175,6 +175,8 @@ requirements/
 | `traceability.md` | Detailed reasoning, meeting notes, arguments behind each decision | Requirements, Acceptance Criteria |
 
 The rule guiding this separation: **the requirement and its Acceptance Criteria always live together, in the same file** (`functional/`/`non-functional/`) — never in a separate artifact. Everything else (index, decisions, discussion) is metadata around the requirement, not the requirement itself.
+
+> `traceability.md` is a placeholder for that discussion/discovery phase. Its own structure isn't defined yet and it may eventually move to a dedicated directory outside `requirements/` — but every `HD-<ID>` in `requirements.md` will keep pointing back to whatever holds that phase, wherever it lives.
 
 ## The 2 ID types
 
