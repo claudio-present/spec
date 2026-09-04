@@ -69,19 +69,6 @@ To build a synchronous, computable spec, four independent and modular categories
 
 ---
 
-## Decomposing a Story: 5 Behavioral Parts
-
-A user story (Pillar A) is an input, but it can't be turned directly into an EARS-worded requirement — it's still too abstract. Before it reaches `requirements/`, it gets decomposed into 5 elementary parts:
-
-1. **Trigger / Actor** — the user or system event that starts the behavior (e.g. *"when the user taps Confirm"*).
-2. **Inputs & Validations** — the data involved and the entry-barrier rules on it (e.g. *"the album title must be a non-empty string up to 50 characters"*).
-3. **Processing Logic** — the state transitions, calculations, or data transformations applied.
-4. **Outputs & States** — the observable result or persistent change produced (e.g. *"the album is persisted with status `DRAFT`"*).
-5. **Error Paths** — every predictable failure (hardware, network, business logic) and how it's handled.
-
-A decomposition only counts as done once each part maps a specific input to an observable output — that mapping is what turns into the EARS trigger/response pair and the Acceptance Criteria in `requirements/`.
-
----
 
 ## From Pillar to `sources.md`
 
