@@ -1,7 +1,5 @@
 # <Capability/Feature Name>
 
-**Priority (MoSCoW):** Must-have | Should-have | Could-have | Will-not-have
-
 Brief description of what this capability does and why it exists.
 
 ## Requirements
