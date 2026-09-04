@@ -1,19 +1,9 @@
 # spec
 
-A contract is a formal, machine-checkable definition of an interface,
-independent of whatever implements or calls it — as opposed to a prose spec,
-which describes intent but isn't specific enough to generate code from or
-verify automatically. Every interface here today is an API, but the folder
-isn't scoped to APIs specifically — a module-level contract fits the same
-structure.
+Spec-driven development template. Each top-level folder is its own stage
+of the pipeline — see its own README for what it contains and why.
 
-```
-contracts/
-├── owned/      # interfaces this spec owns — the contract is authoritative
-└── consumed/   # interfaces this spec only consumes — pinned expectations
-
-edgecases/      # numbered boundary conditions and failure modes
-```
-
-See [contracts/README.md](contracts/README.md) and
-[edgecases/README.md](edgecases/README.md) for why each exists.
+- [`contracts/`](contracts/README.md)
+- [`edgecases/`](edgecases/README.md)
+- [`requirements/`](requirements/README.md)
+- [`system-context/`](system-context/README.md)
