@@ -22,9 +22,9 @@ As advocated by Spec Kit, Spec-Driven Development (SDD) is founded on the premis
 
 ---
 
-## The 3 Building Blocks of a Requirement
+## The 2 Building Blocks of a Requirement
 
-RFC 2119, EARS, and MoSCoW each answer a different question about a requirement — how *binding* it is, how *precisely* it's stated, and how *urgent* it is. Together they leave nothing about a requirement ambiguous.
+RFC 2119 and EARS each answer a different question about a requirement — how *binding* it is, and how *precisely* it's stated. Together they leave nothing about a requirement ambiguous.
 
 ### RFC 2119 Keywords
 
@@ -96,23 +96,6 @@ Reach for `MUST`/`SHALL` by default. Use `SHOULD` only when you truly mean "unle
 
    *Example:* If an invalid credit card number is entered, then the website shall display "please re-enter credit card details".
 
-### MoSCoW Prioritization
-
-**What it is:** a methodology originally developed by Dai Clegg at Oracle that sorts every requirement into one of four buckets:
-
-- **Must-have** — mandatory
-- **Should-have** — important but not vital
-- **Could-have** — nice-to-have
-- **Will-not-have** — out of immediate scope
-
-> Source: [MoSCoW Prioritization — ProductPlan](https://www.productplan.com/glossary/moscow-prioritization)
-
-**What it's for:** in traditional engineering, its job is preventing *scope creep* — giving everyone a shared answer to "what actually has to ship."
-
-**Why it's indispensable here:** an AI agent's context window is limited, and **context rot** — the drop in response quality as that window fills up — means it can't reliably hold every requirement as equally important. MoSCoW gives the agent an explicit signal for what to prioritize when context is tight: `Must-have` requirements can't be dropped or summarized away; `Could-have`/`Will-not-have` ones can be. Without this, every requirement looks equally urgent, and the agent has no principled way to decide what to build first or what to trim.
-
-> Source: [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core)
-
 ---
 
 ## Closing a Gap: From Open Question to Acceptance Criteria
@@ -147,7 +130,7 @@ The question itself, and the detailed record of logical discussions and product 
 
 # Structure of `requirements/`
 
-This section explains *how* the `requirements/` folder is organized and *why*. The rules above explain how to write a good requirement (EARS, MoSCoW, RFC 2119); this section explains where everything actually lives and how it flows between files.
+This section explains *how* the `requirements/` folder is organized and *why*. The rules above explain how to write a good requirement (EARS, RFC 2119); this section explains where everything actually lives and how it flows between files.
 
 ## File tree
 
@@ -168,8 +151,8 @@ requirements/
 
 | File | Contains | Does not contain |
 |---|---|---|
-| `README.md` | Writing rules (EARS, MoSCoW, RFC 2119) + this structure | Concrete requirements |
-| `requirements.md` | Index (links + product-level MoSCoW) and `Human Decisions` (the "why" behind each decision already made) | Requirements, Acceptance Criteria |
+| `README.md` | Writing rules (EARS, RFC 2119) + this structure | Concrete requirements |
+| `requirements.md` | Index (links to `functional/`/`non-functional/`) and `Human Decisions` (the "why" behind each decision already made) | Requirements, Acceptance Criteria |
 | `functional/<feature>.md` | `REQ-<ID>` (behavior, in EARS) + its Acceptance Criteria | Discussion/reasoning behind the decision |
 | `non-functional/<attribute>.md` | `NFR-<ID>` (constraint/quality, in EARS) + its Acceptance Criteria | Discussion/reasoning behind the decision |
 | `traceability.md` | Detailed reasoning, meeting notes, arguments behind each decision | Requirements, Acceptance Criteria |

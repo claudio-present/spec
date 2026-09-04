@@ -2,22 +2,15 @@
 
 Entry point of the spec. Does not contain requirements themselves — those live in `functional/` (behaviors per feature) and `non-functional/` (quality attributes). This file only aggregates the product overview and the human decisions already made.
 
-## MoSCoW (product level)
-
-- **Must-have:**
-- **Should-have:**
-- **Could-have:**
-- **Will-not-have:**
-
 ## Functional
 
-<!-- One link per file in functional/, with priority and a one-line summary -->
-- [ ] [`functional/<feature>.md`](./functional/<feature>.md) — <short summary> (Must-have)
+<!-- One link per file in functional/, with a one-line summary -->
+- [ ] [`functional/<feature>.md`](./functional/<feature>.md) — <short summary>
 
 ## Non-functional
 
-<!-- One link per file in non-functional/, with priority and a one-line summary -->
-- [ ] [`non-functional/<attribute>.md`](./non-functional/<attribute>.md) — <short summary> (Should-have)
+<!-- One link per file in non-functional/, with a one-line summary -->
+- [ ] [`non-functional/<attribute>.md`](./non-functional/<attribute>.md) — <short summary>
 
 ## Human Decisions
 
