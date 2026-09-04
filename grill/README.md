@@ -41,6 +41,8 @@ When a gap is found in a requirement (e.g. *"what happens if the network drops m
 - **Category:** `Blocking` or `Non-blocking` — see below
 - **Applies to:** the `REQ-<ID>` / `NFR-<ID>` it affects, or `cross-cutting`
 
+`Category` only decides whether the pipeline *waits* for the answer — it never decides whether a human answer is needed. Every OQ, `Blocking` or `Non-blocking`, must eventually go through step 2 and reach `Answered`; there is no path from `Open` straight to `Closed`.
+
 There is no separate pipeline-state file (no `STATE.md`). The gate is a rule derived directly from this registry: **a `REQ`/`NFR` is gapped if it has an `Open` OQ with `Category: Blocking` applied to it.** Nothing to keep in sync — the registry is the single source of truth.
 
 ### 2. HD (Human Decision) — resolution
@@ -67,7 +69,9 @@ Once the decision is fully documented, the OQ is marked `Closed`: everything abo
 | `Answered` | Decision made; the Acceptance Criterion has been (or is being) injected into the requirement file and the `HD-<ID>` catalogued. |
 | `Closed` | Fully archived — the entry has moved from `open-questions.md` to `traceability.md`. |
 
-| Category | Pipeline impact |
-|---|---|
-| `Blocking` | Halts code/test generation for the affected `REQ`/`NFR` until the OQ is `Answered`. |
-| `Non-blocking` | Advisory. Research or prototyping on the affected area may continue in parallel. |
+| Category | Pipeline impact | Still needs a human answer? |
+|---|---|---|
+| `Blocking` | Halts code/test generation for the affected `REQ`/`NFR` until the OQ is `Answered`. | Yes |
+| `Non-blocking` | Advisory. Research or prototyping on the affected area may continue in parallel. | Yes |
+
+`Category` never exempts an OQ from being answered — it only decides whether the pipeline sits idle while waiting.
